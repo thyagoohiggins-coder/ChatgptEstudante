@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>ChatGPT Estudante</title>
+<style>
+  :root{--bg:#fff;--fg:#1d1d1f;--muted:#6e6e73;--field:#f5f5f7;--line:#e3e3e8;--green:#10a37f;--green-d:#0d8a6b;--tip:#fff7e0;--tip-line:#f5d77a}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  .wrap{max-width:560px;margin:0 auto;padding:20px 16px 40px}
+  h1{font-size:24px;font-weight:800;margin:4px 0 14px}
+  .tip{background:var(--tip);border:1px solid var(--tip-line);border-radius:14px;padding:11px 13px;font-size:14px;line-height:1.4}
+  .tabs{display:flex;gap:8px;overflow-x:auto;padding:16px 0 4px;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:none;border:0;background:#f1f1f4;color:var(--fg);padding:9px 14px;border-radius:999px;font-size:14px;cursor:pointer}
+  .tab.on{background:#111;color:#fff}
+  section{display:none;flex-direction:column;gap:12px;padding-top:12px}
+  section.on{display:flex}
+  label{font-size:13px;font-weight:600}
+  .hint{font-size:13px;color:var(--muted);margin:0}
+  textarea,input{width:100%;font:inherit;font-size:15px;background:var(--field);border:1px solid var(--line);border-radius:12px;padding:11px;color:var(--fg);resize:vertical}
+  textarea:focus,input:focus{outline:2px solid var(--green);border-color:transparent}
+  .qty{display:flex;gap:8px;flex-wrap:wrap}
+  .qty button{flex:1;min-width:56px;border:1px solid var(--line);background:var(--field);padding:10px;border-radius:12px;font-size:15px;cursor:pointer}
+  .qty button.on{background:var(--green);border-color:var(--green);color:#fff;font-weight:700}
+  .btns{display:flex;gap:8px}
+  .send{flex:1;border:0;background:var(--green);color:#fff;font-weight:700;font-size:16px;padding:14px;border-radius:14px;cursor:pointer}
+  .send:hover{background:var(--green-d)}
+  .copy{border:1px solid var(--line);background:#fff;font-size:15px;padding:14px 16px;border-radius:14px;cursor:pointer}
+  .out{background:var(--field);border:1px dashed #ccc;border-radius:12px;padding:11px;font-size:13px;line-height:1.5;color:#444;white-space:pre-wrap;min-height:60px}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111;color:#fff;padding:10px 16px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none}
+  .toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>ChatGPT Estudante</h1>
+  <div class="tip">💡 <b>Dica:</b> para o ChatGPT ficar adequado aos estudos, vá em <b>Configurações → Personalização → Estilo e tom básicos</b> e escolha <b>Eficiente</b>.</div>
+
+  <nav class="tabs">
+    <button class="tab on" data-tab="t1">Não entendi</button>
+    <button class="tab" data-tab="t2">Organizar</button>
+    <button class="tab" data-tab="t3">Exemplos</button>
+    <button class="tab" data-tab="t4">Falante nativo</button>
+  </nav>
+
+  <!-- Prompt 1 -->
+  <section id="t1" class="on">
+    <label for="frase">Cole sua frase aqui</label>
+    <textarea id="frase" rows="3" placeholder="Girls make me nervous and too much attention has me shutting down"></textarea>
+    <label for="palavra">Digite a palavra/estrutura que não entendeu</label>
+    <input id="palavra" placeholder="shutting down">
+    <div class="btns"><button class="send" data-send="t1">Enviar ao ChatGPT ↗</button><button class="copy" data-copy="t1">Copiar</button></div>
+    <div class="out" id="out-t1"></div>
+  </section>
+
+  <!-- Prompt 2 -->
+  <section id="t2">
+    <p class="hint">Use <b>depois</b> do prompt "Não entendi", na <b>mesma conversa</b>. Toque em <b>Copiar</b> e cole no chat aberto (o botão Enviar abre uma conversa nova).</p>
+    <div class="btns"><button class="send" data-copy="t2">Copiar prompt</button><button class="copy" data-send="t2">Novo chat ↗</button></div>
+    <div class="out" id="out-t2"></div>
+  </section>
+
+  <!-- Prompt 3 -->
+  <section id="t3">
+    <label for="estrutura">A Palavra/Estrutura</label>
+    <input id="estrutura" placeholder="shutting down">
+    <label for="definicao">Definição</label>
+    <textarea id="definicao" rows="2" placeholder="to become quiet and withdrawn, stop responding emotionally"></textarea>
+    <label>Quantidade de exemplos</label>
+    <div class="qty" id="qty">
+      <button>5</button><button class="on">10</button><button>15</button><button>20</button><button>30</button>
+    </div>
+    <div class="btns"><button class="send" data-send="t3">Enviar ao ChatGPT ↗</button><button class="copy" data-copy="t3">Copiar</button></div>
+    <div class="out" id="out-t3"></div>
+  </section>
+
+  <!-- Prompt 4 -->
+  <section id="t4">
+    <p class="hint">O ChatGPT escolhe um assunto, puxa conversa e corrige suas frases em inglês.</p>
+    <div class="btns"><button class="send" data-send="t4">Começar conversa ↗</button><button class="copy" data-copy="t4">Copiar</button></div>
+    <div class="out" id="out-t4"></div>
+  </section>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+let qty = 10;
+
+const prompts = {
+  t1: () => {
+    const f = $('frase').value.trim() || '[frase colada]';
+    const p = $('palavra').value.trim() || '[palavra aqui]';
+    return `o que significa "${p}" em "${f}", estou aprendendo inglês, consumindo conteúdo em inglês falado e escrito e não entendi isso, você pode me dar exemplos de uso para entender melhor ? quanto mais exemplos e mais diversificados melhor responda tudo em inglês para eu consumir mais inglês, use seu conhecimento não precisa puxar da internet, preciso aprender esse conteúdo sem associar/comparar ou traduzir com português, preciso entender o significado em questão, tente não ser longo se não for necessário`;
+  },
+  t2: () => `Quero que me faça um favor, você entendeu e identificou a estrutura correta né? agora poderia organizar esse conteúdo para mim da seguinte forma:
+
+os exemplos de uso nas primeiras linhas das suas mensagens, e enumerados
+
+Logo abaixo
+
+nome da estrutura correta + transcrição fonética dela + estrutura gramatical + classe gramatical dela (Tudo na mesma linha)
+
+o significado da estrutura aqui:`,
+  t3: () => {
+    const e = $('estrutura').value.trim() || '[palavra/estrutura]';
+    const d = $('definicao').value.trim() || '[definição]';
+    return `Frases de exemplos de uso com:
+
+A Palavra/Estrutura: ${e}
+
+definição: ${d}
+
+Quero ${qty} exemplos da palavra acima no contexto correto que sugeri.
+Responda em inglês`;
+  },
+  t4: () => `Escolha um assunto aleatório em inglês e vamos falar dele em inglês sempre, você puxa o assunto e eu respondo, quando eu responder, você corrige a frase em inglês na primeira linha destacando onde errei e imediatamente retome ao assunto sem mais delongas.`
+};
+
+function render(){ for (const k in prompts) $('out-'+k).textContent = prompts[k](); }
+
+function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1800); }
+
+async function copy(text){
+  try { await navigator.clipboard.writeText(text); }
+  catch { const a=document.createElement('textarea'); a.value=text; document.body.appendChild(a); a.select(); document.execCommand('copy'); a.remove(); }
+}
+
+function needsInput(k){
+  if (k==='t1' && (!$('frase').value.trim() || !$('palavra').value.trim())) { toast('Preencha a frase e a palavra'); return true; }
+  if (k==='t3' && !$('estrutura').value.trim()) { toast('Preencha a palavra/estrutura'); return true; }
+  return false;
+}
+
+document.addEventListener('click', async e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.tab){
+    document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x===b));
+    document.querySelectorAll('section').forEach(s=>s.classList.toggle('on', s.id===b.dataset.tab));
+  } else if (b.dataset.send){
+    const k=b.dataset.send; if (needsInput(k)) return;
+    const text = prompts[k]();
+    copy(text); // cópia de segurança caso o ChatGPT não envie sozinho
+    window.open('https://chatgpt.com/?q=' + encodeURIComponent(text), '_blank');
+  } else if (b.dataset.copy){
+    const k=b.dataset.copy; if (needsInput(k)) return;
+    await copy(prompts[k]()); toast('Prompt copiado ✓');
+  } else if (b.parentElement.id==='qty'){
+    document.querySelectorAll('#qty button').forEach(x=>x.classList.toggle('on', x===b));
+    qty = b.textContent; render();
+  }
+});
+
+// Ao preencher a palavra no prompt 1, já preenche a aba Exemplos
+$('palavra').addEventListener('input', () => { $('estrutura').value = $('palavra').value; });
+document.addEventListener('input', render);
+render();
+</script>
+</body>
+</html>
