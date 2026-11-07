@@ -1,0 +1,41 @@
+plugins {
+    id 'com.android.application'
+}
+
+// Número da versão vem do GitHub Actions (cada build aumenta 1)
+def buildNumber = (System.getenv("GITHUB_RUN_NUMBER") ?: "1").toInteger()
+
+android {
+    namespace 'com.estudante.chatgpt'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.estudante.chatgpt'
+        minSdk 26
+        targetSdk 35
+        versionCode buildNumber
+        versionName "1.0.${buildNumber}"
+    }
+
+    // Chave fixa: permite instalar atualizações por cima da versão anterior
+    signingConfigs {
+        fixed {
+            storeFile file('release.keystore')
+            storePassword 'estudante'
+            keyAlias 'estudante'
+            keyPassword 'estudante'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.fixed
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
