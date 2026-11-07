@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opções de Design</title>
+<style>
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#eceef2;color:#222;padding:24px 16px}
+  h1{text-align:center;margin:0 0 6px;font-size:22px}
+  p.sub{text-align:center;margin:0 0 28px;color:#666}
+  .row{display:flex;flex-wrap:wrap;gap:28px;justify-content:center}
+  .opt{display:flex;flex-direction:column;align-items:center;gap:10px}
+  .opt h2{margin:0;font-size:17px}
+  .opt small{color:#666;max-width:300px;text-align:center}
+  .phone{width:300px;height:600px;border-radius:34px;overflow:hidden;border:8px solid #111;box-shadow:0 10px 30px rgba(0,0,0,.2);display:flex;flex-direction:column;font-size:13px}
+  .tabs{display:flex;gap:6px;overflow:hidden;padding:0 12px 10px}
+  .tab{padding:6px 10px;border-radius:999px;white-space:nowrap;font-size:11px}
+  .body{flex:1;padding:12px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
+  label{font-size:11px;font-weight:600}
+  .in{border-radius:10px;padding:9px;font-size:12px}
+  .btn{border-radius:12px;padding:11px;text-align:center;font-weight:700}
+  .out{border-radius:10px;padding:9px;font-size:10.5px;line-height:1.4;flex:1;overflow:hidden}
+
+  /* A — Claro Minimalista */
+  .a{background:#fff;color:#1d1d1f}
+  .a .top{padding:16px 14px 10px;font-weight:800;font-size:18px}
+  .a .tip{margin:0 12px;background:#fff7e0;border:1px solid #f5d77a;border-radius:12px;padding:8px 10px;font-size:11px}
+  .a .tab{background:#f1f1f4} .a .tab.on{background:#111;color:#fff}
+  .a .in{background:#f5f5f7;border:1px solid #e3e3e8}
+  .a .btn{background:#10a37f;color:#fff}
+  .a .out{background:#f5f5f7;border:1px dashed #ccc;color:#444}
+
+  /* B — Escuro Neon */
+  .b{background:#0f1117;color:#e8eaf0}
+  .b .top{padding:16px 14px 10px;font-weight:800;font-size:18px;background:linear-gradient(90deg,#7c5cff,#00d4ff);-webkit-background-clip:text;color:transparent}
+  .b .tip{margin:0 12px;background:#1b1f2c;border-left:4px solid #00d4ff;border-radius:8px;padding:8px 10px;font-size:11px;color:#bfe9ff}
+  .b .tab{background:#1b1f2c;color:#9aa3b5} .b .tab.on{background:#7c5cff;color:#fff}
+  .b .in{background:#1b1f2c;border:1px solid #2b3145;color:#e8eaf0}
+  .b .btn{background:linear-gradient(90deg,#7c5cff,#00d4ff);color:#fff}
+  .b .out{background:#151925;border:1px solid #2b3145;color:#b8c0d4}
+
+  /* C — Caderno Escolar */
+  .c{background:#fffdf5;color:#2b2b2b;background-image:repeating-linear-gradient(#fffdf5 0 23px,#dfe9f7 23px 24px)}
+  .c .top{padding:16px 14px 10px;font-weight:800;font-size:19px;font-family:"Comic Sans MS","Chalkboard SE",cursive;color:#1e5bb8}
+  .c .tip{margin:0 12px;background:#fff59d;border-radius:4px;padding:8px 10px;font-size:11px;transform:rotate(-1deg);box-shadow:2px 3px 0 rgba(0,0,0,.12)}
+  .c .tab{background:#fff;border:2px solid #1e5bb8;color:#1e5bb8} .c .tab.on{background:#1e5bb8;color:#fff}
+  .c .in{background:#fff;border:2px solid #2b2b2b}
+  .c .btn{background:#ff7043;color:#fff;border:2px solid #2b2b2b;box-shadow:3px 3px 0 #2b2b2b}
+  .c .out{background:#fff;border:2px solid #2b2b2b;color:#444}
+</style>
+</head>
+<body>
+<h1>ChatGPT Estudante — escolha um design</h1>
+<p class="sub">Mesma tela (Prompt 1 — "Não entendi") em 3 estilos visuais.</p>
+<div class="row">
+
+<div class="opt">
+  <h2>A · Claro Minimalista</h2>
+  <div class="phone a">
+    <div class="top">ChatGPT Estudante</div>
+    <div class="tip">💡 <b>Dica:</b> no ChatGPT, vá em Personalização → <b>Estilo e tom básicos</b> → <b>Eficiente</b>.</div>
+    <div class="tabs" style="padding-top:10px"><span class="tab on">Não entendi</span><span class="tab">Organizar</span><span class="tab">Exemplos</span><span class="tab">Falante nativo</span></div>
+    <div class="body">
+      <label>Cole sua frase aqui</label><div class="in">Girls make me nervous and too much attention has me shutting down</div>
+      <label>Palavra/estrutura que não entendeu</label><div class="in">shutting down</div>
+      <div class="btn">Copiar prompt</div>
+      <div class="out">o que significa "shutting down" em "Girls make me nervous and too much attention has me shutting down.", estou aprendendo inglês...</div>
+    </div>
+  </div>
+  <small>Limpo, estilo app da Apple, verde do ChatGPT. Foco total no conteúdo.</small>
+</div>
+
+<div class="opt">
+  <h2>B · Escuro Neon</h2>
+  <div class="phone b">
+    <div class="top">ChatGPT Estudante</div>
+    <div class="tip">💡 <b>Dica:</b> Personalização → <b>Estilo e tom básicos</b> → <b>Eficiente</b>.</div>
+    <div class="tabs" style="padding-top:10px"><span class="tab on">Não entendi</span><span class="tab">Organizar</span><span class="tab">Exemplos</span><span class="tab">Falante nativo</span></div>
+    <div class="body">
+      <label>Cole sua frase aqui</label><div class="in">Girls make me nervous and too much attention has me shutting down</div>
+      <label>Palavra/estrutura que não entendeu</label><div class="in">shutting down</div>
+      <div class="btn">Copiar prompt</div>
+      <div class="out">o que significa "shutting down" em "Girls make me nervous and too much attention has me shutting down.", estou aprendendo inglês...</div>
+    </div>
+  </div>
+  <small>Modo escuro moderno, roxo/ciano. Confortável para estudar à noite.</small>
+</div>
+
+<div class="opt">
+  <h2>C · Caderno Escolar</h2>
+  <div class="phone c">
+    <div class="top">ChatGPT Estudante ✏️</div>
+    <div class="tip">📌 <b>Dica:</b> Personalização → <b>Estilo e tom básicos</b> → <b>Eficiente</b>.</div>
+    <div class="tabs" style="padding-top:12px"><span class="tab on">Não entendi</span><span class="tab">Organizar</span><span class="tab">Exemplos</span><span class="tab">Falante nativo</span></div>
+    <div class="body">
+      <label>Cole sua frase aqui</label><div class="in">Girls make me nervous and too much attention has me shutting down</div>
+      <label>Palavra/estrutura que não entendeu</label><div class="in">shutting down</div>
+      <div class="btn">Copiar prompt</div>
+      <div class="out">o que significa "shutting down" em "Girls make me nervous and too much attention has me shutting down.", estou aprendendo inglês...</div>
+    </div>
+  </div>
+  <small>Visual divertido de caderno pautado com post-it. Tom leve e estudantil.</small>
+</div>
+
+</div>
+</body>
+</html>
